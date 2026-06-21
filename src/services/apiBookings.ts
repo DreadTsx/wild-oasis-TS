@@ -1,3 +1,4 @@
+import type { BookingTableTypes } from "../types/bookingTypes";
 import { PAGE_SIZE } from "../utils/constants";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
@@ -43,7 +44,7 @@ export async function getAllBookings({
     throw new Error("Bookings could not be loaded");
   }
 
-  return { data, count };
+  return { data: data as unknown as BookingTableTypes[] | null, count };
 }
 
 export async function getBooking(id: number) {
