@@ -140,7 +140,7 @@ interface PrepareDataProps {
 function prepareData({ startData, stays }: PrepareDataProps) {
   // A bit ugly code, but sometimes this is what it takes when working with real data 😅
 
-  function incArrayValue(arr, field) {
+  function incArrayValue(arr: { duration: string; value: number; color: string }[], field: string) {
     return arr.map((obj) =>
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj,
     );
@@ -207,7 +207,7 @@ export default function DurationChart({ confirmedStays }: DurationChartProps) {
             <Legend
               verticalAlign="middle"
               align="right"
-              width="30%"
+              width={0.3}
               layout="vertical"
             />
           )}

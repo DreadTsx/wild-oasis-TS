@@ -11,18 +11,6 @@ import Table from "../../ui/Table";
 import { useContext } from "react";
 import Menus from "../../ui/Menus";
 
-// const TableRow = styled.div`
-//   display: grid;
-//   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-//   column-gap: 2.4rem;
-//   align-items: center;
-//   padding: 1.4rem 2.4rem;
-
-//   &:not(:last-child) {
-//     border-bottom: 1px solid var(--color-grey-100);
-//   }
-// `;
-
 const Img = styled.img`
   display: block;
   width: 6.4rem;
@@ -56,11 +44,6 @@ const Discount = styled.div`
   white-space: nowrap;
 `;
 
-// Below 600px, turn the six columns (image, name, capacity, price, discount,
-// menu) into a small card: image on the left spanning the height, name +
-// menu button on the top line, capacity below it, price/discount on the
-// last line. Same six children, same source order -- just re-targeted by
-// position with grid-template-areas.
 const StyledCabinRow = styled(Table.Row)`
   @media (max-width: 600px) {
     display: grid;
@@ -142,7 +125,10 @@ function CabinRow({ cabin }: CabinRowProps) {
 
   return (
     <StyledCabinRow>
-      <Img src={image || ""} alt={name} />
+      <Img
+        src={image instanceof File ? URL.createObjectURL(image) : image || ""}
+        alt={name}
+      />
       <Cabin>{name}</Cabin>
       <div>Fits up to {maxCapacity} guests</div>
       <Price>{formatCurrency(regularPrice)}</Price>
@@ -196,10 +182,6 @@ function CabinRow({ cabin }: CabinRowProps) {
             </Modal.Window>
           </Menus.Menu>
         </Modal>
-
-        {/* <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
-          <HiTrash />
-        </button> */}
       </div>
     </StyledCabinRow>
   );

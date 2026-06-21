@@ -30,7 +30,7 @@ export interface BookingTableTypes {
   endDate: string;
   numNights: number;
   numGuests: number;
-  hasBreakfast: boolean;
+  hasBreakfast?: boolean;
   status: "unconfirmed" | "checked-in" | "checked-out";
   totalPrice: number;
   cabins: { name: string };

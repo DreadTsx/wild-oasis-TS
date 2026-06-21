@@ -42,18 +42,6 @@ export default function SalesChart({ bookings, numDays }: SalesChartProps) {
     end: new Date(),
   });
 
-  // const data = allDates.map((date) => {
-  //   return {
-  //     label: format(date, "dd MMM"),
-  //     totalSales: bookings
-  //       .filter((booking) => isSameDay(date, new Date(booking.created_at)))
-  //       .reduce((acc, cur) => acc + cur.totalPrice, 0),
-  //     extrasSales: bookings
-  //       .filter((booking) => isSameDay(date, new Date(booking.created_at)))
-  //       .reduce((acc, cur) => acc + cur.extrasPrice, 0),
-  //   };
-  // });
-
   const data = allDates.map((date) => {
     const dayBookings = bookings.filter((b) =>
       isSameDay(date, new Date(b.created_at)),
@@ -82,8 +70,11 @@ export default function SalesChart({ bookings, numDays }: SalesChartProps) {
     <StyledSalesChart>
       <Heading as="h2">
         {" "}
-        Sales Chart from {format(allDates.at(0), "dd MMM yyyy")} &mdash;{" "}
-        {format(allDates.at(-1), "dd MMM yyyy")}
+        Sales Chart from {format(
+          allDates.at(0) || new Date(),
+          "dd MMM yyyy",
+        )}{" "}
+        &mdash; {format(allDates.at(-1) || new Date(), "dd MMM yyyy")}
       </Heading>
 
       <ResponsiveContainer width="100%" height={300}>
